@@ -1,92 +1,157 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
     <v-main>
-      <v-container>
+      <v-overlay :opacity="1" :value="displayOverlay">
+        <v-progress-circular indeterminate size="64"> </v-progress-circular>
+      </v-overlay>
+      <v-card color="#121212" flat class="mx-auto overflow-hidden">
+        <v-app-bar dense color="primary" dark>
+          <v-img v-if="!isMobile" width="45" :src="logoSrc"></v-img>
+
+          <v-app-bar-nav-icon
+            v-if="isMobile"
+            @click="drawer = true"
+          ></v-app-bar-nav-icon>
+
+          <v-img
+            v-if="isMobile"
+            width="45"
+            class="mobile-logo-app-bar"
+            :src="logoSrc"
+          ></v-img>
+
+          <v-tabs
+            v-if="!isMobile"
+            align-with-title
+            :value="$route.name"
+            class="ml-12"
+          >
+            <v-tab
+              v-for="(item, key) in items"
+              :key="key"
+              v-bind="item.binds"
+              class="white--text mx-3"
+              nuxt
+            >
+              <span class="aaa" v-text="item.title"></span>
+            </v-tab>
+          </v-tabs>
+
+          <v-spacer></v-spacer>
+
+          <v-btn v-if="!isMobile" class="mx-2 aaa" depressed color="secondary">
+            <v-icon class="mr-2">mdi-crown</v-icon> Devenir premium
+          </v-btn>
+
+          <v-btn v-if="!isMobile" class="mx-2 aaa" depressed text>
+            Connexion
+          </v-btn>
+        </v-app-bar>
+
+        <v-navigation-drawer
+          v-model="drawer"
+          color="#121212"
+          absolute
+          temporary
+        >
+          <v-list nav dense>
+            <v-list-item-group
+              v-model="group"
+              color="primary"
+              active-class="text--accent-4"
+            >
+              <v-list-item
+                v-for="(item, key) in items"
+                :key="key"
+                v-bind="item.binds"
+                nuxt
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-title
+                  class="white--text"
+                  v-text="item.title"
+                ></v-list-item-title>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-navigation-drawer>
         <Nuxt />
-      </v-container>
+      </v-card>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer dark padless>
+      <v-card class="flex" flat tile>
+        <v-card-text class="py-2 white--text text-center">
+          {{ new Date().getFullYear() }} — <strong>Streamkits</strong>
+        </v-card-text>
+      </v-card>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-export default {
-  name: 'DefaultLayout',
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component
+export default class Default extends Vue {
+  drawer = false
+  group = null
+  activate = true
+  displayOverlay = true
+  logoSrc = '/logos/logo-white.svg'
+
+  mounted() {
+    this.displayOverlay = false
+  }
+
+  get isMobile() {
+    return this.$vuetify.breakpoint.smAndDown
+  }
+
+  get items() {
+    return [
+      {
+        title: 'Accueil',
+        icon: 'mdi-home',
+        binds: {
           to: '/',
+          value: '/',
+          exact: true,
         },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+      },
+      {
+        title: 'Présentation',
+        icon: 'mdi-home',
+        binds: {
+          to: '/',
+          value: '/',
+          exact: true,
         },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
-    }
-  },
+      },
+      {
+        title: 'Ressources',
+        icon: 'mdi-home',
+        binds: {
+          to: '/',
+          value: '/',
+          exact: true,
+        },
+      },
+    ]
+  }
 }
 </script>
+
+<style>
+.mobile-logo-app-bar {
+  flex: 0 0 auto;
+}
+
+.aaa {
+  font-family: 'Aldrich-Regular', sans-serif !important;
+  text-decoration: none;
+  font-weight: 550;
+  font-size: 0.9rem;
+}
+</style>
