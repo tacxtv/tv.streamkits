@@ -37,7 +37,11 @@ export default <NuxtConfig>{
     // {src: '~/plugins/loadscript.js', ssr: false},
   ],
   components: true,
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/tailwindcss',
+  ],
   modules: ['@nuxtjs/axios'],
   axios: {},
   vuetify: {

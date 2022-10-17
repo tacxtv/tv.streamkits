@@ -33,49 +33,63 @@
               class="white--text mx-3"
               nuxt
             >
-              <span class="aaa" v-text="item.title"></span>
+              <span class="font-menu-item" v-text="item.title"></span>
             </v-tab>
           </v-tabs>
 
           <v-spacer></v-spacer>
 
-          <v-btn v-if="!isMobile" class="mx-2 aaa" depressed color="secondary">
+          <v-btn
+            v-if="!isMobile"
+            class="mx-2 font-menu-item"
+            depressed
+            color="secondary"
+          >
             <v-icon class="mr-2">mdi-crown</v-icon> Devenir premium
           </v-btn>
 
-          <v-btn v-if="!isMobile" class="mx-2 aaa" depressed text>
+          <v-btn v-if="!isMobile" class="mx-2 font-menu-item" depressed text>
             Connexion
           </v-btn>
         </v-app-bar>
 
         <v-navigation-drawer
           v-model="drawer"
-          color="#121212"
+          color="primary"
+          height="100vh"
           absolute
           temporary
         >
-          <v-list nav dense>
-            <v-list-item-group
-              v-model="group"
-              color="primary"
-              active-class="text--accent-4"
-            >
-              <v-list-item
-                v-for="(item, key) in items"
-                :key="key"
-                v-bind="item.binds"
-                nuxt
-              >
-                <v-list-item-icon>
-                  <v-icon v-text="item.icon"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-title
-                  class="white--text"
-                  v-text="item.title"
-                ></v-list-item-title>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
+          <v-img class="mx-auto mb-3" width="150" :src="logoSrc"></v-img>
+
+          <v-list-item
+            v-for="(item, key) in items"
+            :key="key"
+            class="my-1"
+            dense
+            v-bind="item.binds"
+            nuxt
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content
+              class="white--text font-menu-item"
+              v-text="item.title"
+            ></v-list-item-content>
+          </v-list-item>
+
+          <template #append>
+            <div class="w-full text-center my-2">
+              <v-btn class="font-menu-item" depressed color="secondary">
+                <v-icon class="mr-2">mdi-crown</v-icon> Devenir premium
+              </v-btn>
+            </div>
+
+            <div class="w-full text-center my-2">
+              <v-btn class="font-menu-item" depressed text> Connexion </v-btn>
+            </div>
+          </template>
         </v-navigation-drawer>
         <Nuxt />
       </v-card>
@@ -148,7 +162,7 @@ export default class Default extends Vue {
   flex: 0 0 auto;
 }
 
-.aaa {
+.font-menu-item {
   font-family: 'Aldrich-Regular', sans-serif !important;
   text-decoration: none;
   font-weight: 550;
