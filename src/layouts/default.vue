@@ -110,8 +110,6 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class Default extends Vue {
   drawer = false
-  group = null
-  activate = true
   displayOverlay = true
   logoSrc = '/logos/logo-white.svg'
 
