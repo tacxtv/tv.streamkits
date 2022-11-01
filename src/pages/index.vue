@@ -1,14 +1,16 @@
 <template>
-  <div style="height: 1000px">
+  <div>
     <Carousel></Carousel>
+    <Presentation></Presentation>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Carousel from "~/components/index/Carousel";
+import Carousel from '~/components/index/Carousel'
+import Presentation from '~/components/index/Presentation'
 @Component({
-  components: {Carousel}
+  components: { Presentation, Carousel },
 })
 export default class Index extends Vue {}
 </script>
