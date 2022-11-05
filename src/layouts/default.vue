@@ -5,8 +5,10 @@
         <v-progress-circular indeterminate size="64"> </v-progress-circular>
       </v-overlay>
       <v-card color="#121212" flat class="mx-auto overflow-hidden">
-        <v-app-bar dense color="primary" dark>
-          <v-img v-if="!isMobile" width="45" :src="logoSrc"></v-img>
+        <v-app-bar fixed dense color="primary" dark>
+          <a href="/"
+            ><v-img v-if="!isMobile" width="45" :src="logoSrc"></v-img
+          ></a>
 
           <v-app-bar-nav-icon
             v-if="isMobile"
@@ -134,7 +136,7 @@ export default class Default extends Vue {
       },
       {
         title: 'Présentation',
-        icon: 'mdi-home',
+        icon: 'mdi-account',
         binds: {
           to: '/',
           value: '/',
@@ -142,11 +144,11 @@ export default class Default extends Vue {
         },
       },
       {
-        title: 'Ressources',
-        icon: 'mdi-home',
+        title: 'Nous contacter',
+        icon: 'mdi-email',
         binds: {
-          to: '/',
-          value: '/',
+          to: '/contact',
+          value: '/contact',
           exact: true,
         },
       },

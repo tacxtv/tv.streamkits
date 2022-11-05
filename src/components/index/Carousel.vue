@@ -4,6 +4,7 @@
       hide-delimiter-background
       :show-arrows="false"
       cycle
+      :hide-delimiters="true"
       :interval="10000"
       height="700px"
     >
@@ -12,23 +13,29 @@
         :key="i"
         :src="item.backgroundSrc"
       >
-        <v-row class="h-full" align="center">
-          <v-col cols="12" sm="6">
+        <v-row class="h-full">
+          <v-col :align-self="isMobile ? 'end' : 'center'" cols="12" sm="6">
             <v-img
               class="w-1/2 mx-auto"
               max-width="350px"
               :src="item.imageSrc"
             ></v-img>
           </v-col>
-          <v-col cols="12" sm="6">
+          <v-col :align-self="isMobile ? 'start' : 'center'" cols="12" sm="6">
             <div class="text-center">
               <div
-                class="text-center font-carousel-item-text"
+                class="text-center"
+                :class="
+                  !isMobile
+                    ? 'carousel-item-title'
+                    : 'carousel-item-title-mobile'
+                "
                 v-html="item.text"
               ></div>
               <v-btn
                 v-if="item.button"
                 class="mt-4"
+                large
                 color="primary"
                 @click="item.button.action()"
                 v-text="item.button.text"
@@ -49,7 +56,7 @@ export default class Carousel extends Vue {
   get items() {
     return [
       {
-        backgroundSrc: '/carousel/1.jpeg',
+        backgroundSrc: '/carousel/background.png',
         imageSrc: '/logos/logo-white.svg',
         text: 'Un bot pour les streamers<br>Fait par un streamer',
         button: {
@@ -61,13 +68,27 @@ export default class Carousel extends Vue {
       },
     ]
   }
+
+  get isMobile() {
+    return this.$vuetify.breakpoint.smAndDown
+  }
 }
 </script>
 
 <style>
-.font-carousel-item-text {
+.carousel-item-title {
+  font-size: 2.725rem !important;
+  font-weight: 600;
+  line-height: 3.5rem;
+  letter-spacing: 0.0073529412em !important;
   font-family: 'Aldrich', sans-serif !important;
-  font-weight: 550;
-  font-size: 2rem;
+}
+
+.carousel-item-title-mobile {
+  font-size: 2.025rem !important;
+  font-weight: 600;
+  line-height: 3.5rem;
+  letter-spacing: 0.0073529412em !important;
+  font-family: 'Aldrich', sans-serif !important;
 }
 </style>
