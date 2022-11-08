@@ -7,38 +7,42 @@ import colors from 'vuetify/src/util/colors'
 export default <NuxtConfig>{
   ssr: false,
   telemetry: false,
-  target: 'static',
   router: {
-    base: '/streamkits.fr/'
+    base: '/streamkits.fr/',
   },
   srcDir: 'src/',
   head: {
     titleTemplate: '%s - StreamKits',
     title: 'StreamKits',
     htmlAttrs: {
-      lang: 'fr'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://fonts.cdnfonts.com/css/aldrich',
+      },
+    ],
   },
   css: [],
-  plugins: [
-    // {src: '~/plugins/loadscript.js', ssr: false},
-  ],
-  components: true,
+  plugins: [],
+  components: [{ prefix: 'SK', path: '~/components' }],
   buildModules: [
     '@nuxt/typescript-build',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/tailwindcss',
   ],
-  modules: [
-    '@nuxtjs/axios'
-  ],
+  modules: ['@nuxtjs/axios', ['vuetify-dialog/nuxt', { property: '$toast' }]],
+  vuetifyDialog: {
+    property: '$toast',
+  },
   axios: {},
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -46,16 +50,20 @@ export default <NuxtConfig>{
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: '7F5AF0',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
+          info: colors.blue.base,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
-  build: {}
+  build: {},
+  target: 'static',
+  generate: {
+    fallback: true,
+  },
 }
