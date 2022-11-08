@@ -7,7 +7,6 @@ import colors from 'vuetify/src/util/colors'
 export default <NuxtConfig>{
   ssr: false,
   telemetry: false,
-  target: 'static',
   router: {
     base: '/streamkits.fr/',
   },
@@ -16,7 +15,7 @@ export default <NuxtConfig>{
     titleTemplate: '%s - StreamKits',
     title: 'StreamKits',
     htmlAttrs: {
-      lang: 'fr',
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
@@ -33,16 +32,17 @@ export default <NuxtConfig>{
     ],
   },
   css: [],
-  plugins: [
-    // {src: '~/plugins/loadscript.js', ssr: false},
-  ],
-  components: true,
+  plugins: [],
+  components: [{ prefix: 'SK', path: '~/components' }],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/tailwindcss',
   ],
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', ['vuetify-dialog/nuxt', { property: '$toast' }]],
+  vuetifyDialog: {
+    property: '$toast',
+  },
   axios: {},
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -62,4 +62,8 @@ export default <NuxtConfig>{
     },
   },
   build: {},
+  target: 'static',
+  generate: {
+    fallback: true,
+  },
 }

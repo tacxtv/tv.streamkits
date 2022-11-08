@@ -57,13 +57,17 @@ export default class Carousel extends Vue {
     return [
       {
         backgroundSrc: '/carousel/background.png',
-        imageSrc: '/logos/logo-white.svg',
+        imageSrc: '/logos/logo.svg',
         text: 'Un bot pour les streamers<br>Fait par un streamer',
         button: {
           action: () => {
-            console.log('lol')
+            this.$router.push({
+              path: '/contact',
+              query: { forNewsletter: '1' },
+            })
           },
-          text: 'Se lancer',
+          text: 'Me tenir informé',
+          // text: 'Me lancer',
         },
       },
     ]

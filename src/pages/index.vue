@@ -1,18 +1,13 @@
 <template>
   <div>
-    <Carousel></Carousel>
-    <Presentation></Presentation>
-    <Why></Why>
+    <SK-Index-Carousel></SK-Index-Carousel>
+    <SK-Index-Presentation></SK-Index-Presentation>
+    <SK-Index-Why></SK-Index-Why>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Carousel from '~/components/index/Carousel'
-import Presentation from '~/components/index/Presentation'
-import Why from '~/components/index/Why'
-@Component({
-  components: { Why, Presentation, Carousel },
-})
+@Component({})
 export default class Index extends Vue {}
 </script>
