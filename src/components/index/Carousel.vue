@@ -74,7 +74,7 @@ export default class Carousel extends Vue {
   }
 
   get isMobile() {
-    return this.$vuetify.breakpoint.smAndDown
+    return (this as any).$vuetify.breakpoint.smAndDown
   }
 }
 </script>

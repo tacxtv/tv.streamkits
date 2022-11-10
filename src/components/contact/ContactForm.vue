@@ -93,7 +93,7 @@ export default class ContactForm extends Vue {
   forNewsletter = false
 
   get isMobile() {
-    return this.$vuetify.breakpoint.smAndDown
+    return (this as any).$vuetify.breakpoint.smAndDown
   }
 
   mounted() {
@@ -182,7 +182,7 @@ Bonne journée.`
   }
 
   redirect() {
-    this.$toast.message.success('Votre message a bien été envoyé', {
+    (this as any).$toast.message.success('Votre message a bien été envoyé', {
       position: 'top-right',
     })
     this.$router.replace('/')

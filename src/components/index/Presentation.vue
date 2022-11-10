@@ -119,7 +119,7 @@ export default class Presentation extends Vue {
   }
 
   get isMobile() {
-    return this.$vuetify.breakpoint.smAndDown
+    return (this as any).$vuetify.breakpoint.smAndDown
   }
 
   isEven(x: number) {
