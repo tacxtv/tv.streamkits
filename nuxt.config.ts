@@ -7,7 +7,6 @@ import colors from 'vuetify/src/util/colors'
 export default <NuxtConfig>{
   ssr: false,
   telemetry: false,
-  target: 'static',
   router: {
     base: '/streamkits.tv/',
   },
