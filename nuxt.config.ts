@@ -7,15 +7,16 @@ import colors from 'vuetify/src/util/colors'
 export default <NuxtConfig>{
   ssr: false,
   telemetry: false,
+  target: 'static',
   router: {
-    base: '/streamkits.fr/',
+    base: '/streamkits.tv/',
   },
   srcDir: 'src/',
   head: {
     titleTemplate: '%s - StreamKits',
     title: 'StreamKits',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'fr',
     },
     meta: [
       { charset: 'utf-8' },
