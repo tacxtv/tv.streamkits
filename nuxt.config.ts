@@ -8,7 +8,7 @@ export default <NuxtConfig>{
   ssr: false,
   telemetry: false,
   router: {
-    base: '/streamkits.tv/',
+    // base: '/streamkits.tv/',
   },
   srcDir: 'src/',
   head: {
