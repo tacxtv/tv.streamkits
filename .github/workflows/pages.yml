@@ -87,5 +87,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-#        env:
-#          DISCORD_WEBHOOK_PROJECT: ${{ secrets.DISCORD_WEBHOOK_PROJECT }}
+        env:
+          DISCORD_WEBHOOK_PROJECT: ${{ secrets.DISCORD_WEBHOOK_PROJECT }}
